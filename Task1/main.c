@@ -36,8 +36,8 @@ int main() {
 			int pid = fork();
 			if(pid == 0){
 				//child
-				printf("child: %d\n",word_count(buff));
 				sleep(1);
+				printf("child: %d\n",word_count(buff));
 				break;
 			}
 			else if(pid != -1){
@@ -45,7 +45,6 @@ int main() {
 				wait(NULL);
 			}
 			else perror("Error while calling the fork function");
-            		countPerParagraph[paragraph] = word_count(buff)-1;
             		memset(buff, 0, sizeof(buff));
             		break ;
         	}
@@ -59,8 +58,8 @@ int main() {
 			int pid = fork();
 			if(pid == 0){
 				//child
-				printf("child: %d\n",word_count(buff));
 				sleep(1);
+				printf("child: %d\n",word_count(buff));
 				break;
 			}
 			else if(pid != -1){
@@ -68,9 +67,7 @@ int main() {
 				wait(NULL);
 			}
 			else perror("Error while calling the fork function");
-                	countPerParagraph[paragraph] = word_count(buff);
                 	memset(buff, 0, sizeof(buff));
-                	paragraph++;
             	}
             	else{
                 	flag = false;
@@ -94,14 +91,7 @@ int main() {
         	characterCount++;
    	} while(1);
     	fclose(fp);
-	/*
-    	for(int i=0;i<=paragraph;i++){
-        	count += countPerParagraph[i];
-        	printf("%d\n",countPerParagraph[i]);
-    	}
-    	printf("Paragraph = %d\n",paragraph+1);
-    	printf("Word count = %d\n",count);
-	*/
+
 
     	return 0;
 }
@@ -109,24 +99,14 @@ int main() {
 int word_count(char buff[]){
 	bool flag = false;
     	int count = 0,i=0,c;
-    	//printf("\n");
-    	/*
-    	while(buff[i] != '\0'){
-        	printf("%c",buff[i]);
-            	i++;
-    	}*/
+
     	do{
         	if(buff[i] == '\0') break;
-
-
         	if(buff[i] == 32){
             	count++;
-            	//printf("%d",count);
         	}
         	i++;
     	}while(1);
     	i = 0;
-    	//printf("%d",count);
-    	//sleep(1);
     	return count;
 }
