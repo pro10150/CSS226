@@ -30,7 +30,7 @@ public class Test {
         try{
             File f = new File(file);
             Scanner s = new Scanner(f);
-            ArrayList<String> List = new ArrayList<String>();
+            ArrayList List = new ArrayList();
             while(s.hasNext()){
                 List.add(s.nextLine());
             }
@@ -42,12 +42,13 @@ public class Test {
 
     
     private static class MessageLoop implements Runnable { 
+        @Override
         public void run() {
-            ArrayList importantInfo = read("D:\\CSS226-master\\Task1\\test.txt");
+            ArrayList importantInfo = read("C:\\Users\\66931\\Desktop\\CSS226-master\\Task1\\test1.txt");
             try {
                 Iterator itr = importantInfo.iterator();
                 while (itr.hasNext()) {
-                    Thread.sleep(3000);
+                    Thread.sleep(500);
                     threadMessage1(itr.next().toString());
                 }
             } catch (InterruptedException e) {
@@ -58,7 +59,7 @@ public class Test {
     
     public static void main(String[] args) {
         //variable for the main thread to wait for another thread
-        long patience = 1000 * 20;
+        long patience = 900 * 10;
         if (args.length > 0) {
             try {
                 patience = Long.parseLong(args[0]) * 1000;
@@ -70,22 +71,22 @@ public class Test {
 
         
         //main event
-        threadMessage1("Starting MessageLoop thread");
+        threadMessage2("Starting MessageLoop thread");
         //Get the time that this program started
         long startTime = System.currentTimeMillis();
         //create a new MessageLoop class thread
         Thread t = new Thread(new MessageLoop());
         //star the thread
         t.start();
-        threadMessage1("Waiting for MessageLoop thread to finish");
+        threadMessage2("Waiting for MessageLoop thread to finish");
         //counter to count how loang that the main thread wait
         int count = 1;
         while (t.isAlive()) {
             try {
-                ArrayList<String> words = read("D:\\CSS226-master\\Task1\\test.txt");
+                ArrayList words = read("C:\\Users\\66931\\Desktop\\CSS226-master\\Task1\\test1.txt");
                 Iterator itr = words.iterator();
                 while (itr.hasNext()) {
-                    Thread.sleep(3000);
+                    Thread.sleep(550);
                     threadMessage1(itr.next().toString());
                 }
 
@@ -105,7 +106,7 @@ public class Test {
                 Logger.getLogger(SimpleThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        threadMessage1("Finally!");
+        threadMessage2("Finally!");
     
     }
 }
